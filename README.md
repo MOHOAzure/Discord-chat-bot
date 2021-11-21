@@ -40,8 +40,7 @@ $ # create your bot (example code below)
 $
 $ # check your bot is working
 $ 
-$ 
-$ # create auto 
+$ # make service which could be started automatically (as below)
 ```
 
 * Bot code
