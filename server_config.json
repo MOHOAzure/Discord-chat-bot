@@ -1,3 +1,4 @@
 {
-"mc_trigger": "API_TO_START_SERVER"
+  "mc_trigger": "API_TO_START_SERVER",
+  "special_user" : "DISCORD_USER_ID"
 }
