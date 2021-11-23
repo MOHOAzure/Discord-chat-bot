@@ -1,6 +1,9 @@
 # Discord-chat-bot
 A chat bot working on Discord. The bot is established on AWS services.
 
+# Background
+* [On-Demand-Minecraft-Sever](https://github.com/MOHOAzure/On-Demand-Minecraft-Sever)
+
 # Prerequisites
 * A Discord account + token key + bot settings
 * AWS EC2 (Linux + t3.micro)
@@ -18,7 +21,7 @@ A chat bot working on Discord. The bot is established on AWS services.
   * In panel `scopes`, select `bot`
   * In panel `bot permission`, select `Send Messages` and `Read Message History`
   * copy & paste the generated auth link to a new browser tab
-  * add the bot to a server (create a server if needed)
+  * add the bot to a discord server (create a discord server for test if needed)
 
 # Create bot on AWS
 * Login the machine
@@ -36,87 +39,24 @@ $
 $ # installing a well known Javascript library for interacting with Discord API 
 $ npm install --save discord.js
 $ 
-$ # create your bot (example code below)
+$ # create your bot
 $
-$ # check your bot is working
+$ # check your bot is working via discord
 $ 
 $ # make service which could be started automatically (as below)
 ```
+* [package.json](https://github.com/MOHOAzure/Discord-chat-bot/blob/main/package.json)
 
-* Bot code
-```
-const Discord = require('discord.js');
-const client = new Discord.Client();
-const auth = require('./auth.json');
-const server_config = require('./server_config.json');
-var request = require('request');
+* [auth.json](https://github.com/MOHOAzure/Discord-chat-bot/blob/main/auth.json)
 
-client.login(auth.key);
+* [server_config.json](https://github.com/MOHOAzure/Discord-chat-bot/blob/main/server_config.json)
 
-client.on('ready', ()=> {
-        console.log(`logged in as ${client.user.tag}!`);
-});
+* [Bot code](https://github.com/MOHOAzure/Discord-chat-bot/blob/main/bot.js)
 
-client.on('message', msg=> {
-        if(msg.content === '/ping') {
-                msg.reply('Pong!');
-        }
-        else if(msg.content === '/start') {
-                url = server_config.mc_endpoint;
-
-                request(url, function (error, response, body) {
-                  console.log('error:', error);
-                  console.log('statusCode:', response && response.statusCode);
-                  console.log('body:', body);
-                  msg.reply(body);
-                });
-        }
-});
-```
-
-* auth.json
-```
-{
-  "key":"DISCORD_TOKEN_KEY"
-}
-```
-
-* server_config.json
-```
-{
-  "mc_endpoint": "API_TO_START_SERVER"
-}
-```
 
 # Run bot without screen
 * Run bot when the host machine is started
-* chatbot.service
-```
-[Unit]
-Description=Chatbot Server
-Wants=network.target
-After=network.target
-
-[Service]
-User=chatbot
-Group=chatbot
-Nice=5
-KillMode=control-group
-SuccessExitStatus=0 1
-
-ProtectHome=true
-ProtectSystem=full
-PrivateDevices=true
-NoNewPrivileges=true
-PrivateTmp=true
-InaccessibleDirectories=/root /sys /srv -/opt /media -/lost+found
-ReadWriteDirectories=/var/discord-bot
-WorkingDirectory=/var/discord-bot
-ExecStart=/bin/node bot.js
-
-[Install]
-WantedBy=multi-user.target
-```
+* [chatbot.service](https://github.com/MOHOAzure/Discord-chat-bot/blob/main/chatbot.service)
 
 * Add user to manage the auto service
 ```
