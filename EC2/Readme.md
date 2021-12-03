@@ -60,3 +60,9 @@ $ systemctl stop chatbot
 $
 $ # after the host machine is re-started, the service would be on-line
 ```
+
+## Ref
+* Creating your first Discord Bot — Part 1, Renemari Padillo, https://medium.com/davao-js/2019-tutorial-creating-your-first-simple-discord-bot-47fc836a170b
+* [Discord JS offical doc](https://discordjs.guide/popular-topics/embeds.html#embed-preview)
+* How to Install Node.js and npm on CentOS 7, https://linuxize.com/post/how-to-install-node-js-on-centos-7/
+
