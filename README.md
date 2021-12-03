@@ -1,84 +1,27 @@
 # Discord-chat-bot
-A chat bot working on Discord. The bot is established on AWS services.
-
-# Background
+* A chat bot working on Discord
+* The bot is established on AWS services
+  * Two methods are provided (Lambda or EC2)
+  
+## Background
 * [On-Demand-Minecraft-Sever](https://github.com/MOHOAzure/On-Demand-Minecraft-Sever)
 
-# Prerequisites
-* A Discord account + token key + bot settings
-* AWS EC2 (Linux + t3.micro)
-* Node JS ^14
-  * discord js ^12
-  * request js ^2 (optional)
-
-# Discord settings
+## Discord settings
 * Login https://discordapp.com/developers/applications/
 * New application named `discord-bot`
 * Add bot
 * Reveal bot token key and copy it
 * Auth bot (Follow least privilege discipline)
   * Go to `OAuth2` inside app page
-  * In panel `scopes`, select `bot`
-  * In panel `bot permission`, select `Send Messages` and `Read Message History`
+  * In `scopes` panel select `bot permission`, then select `Send Messages` and `Read Message History`
+  * In `scopes` panel select `applications.commands`
   * copy & paste the generated auth link to a new browser tab
   * add the bot to a discord server (create a discord server for test if needed)
 
-# Create bot on AWS
-* Login the machine
-* Follow these steps
-```
-$ curl -sL https://rpm.nodesource.com/setup_14.x | sudo bash -
-$ yum install -y nodejs
-$ (opt.) node --version
-$ (opt.) npm --version
-$
-$ mkdir -p /var/discord-bot
-$ cd /var/discord-bot
-$ npm init -y
-$
-$ # installing a well known Javascript library for interacting with Discord API 
-$ npm install --save discord.js
-$ 
-$ # create your bot
-$
-$ # check your bot is working via discord
-$ 
-$ # make service which could be started automatically (as below)
-```
-* [package.json](https://github.com/MOHOAzure/Discord-chat-bot/blob/main/package.json)
-
-* [auth.json](https://github.com/MOHOAzure/Discord-chat-bot/blob/main/auth.json)
-
-* [server_config.json](https://github.com/MOHOAzure/Discord-chat-bot/blob/main/server_config.json)
-
-* [Bot code](https://github.com/MOHOAzure/Discord-chat-bot/blob/main/bot.js)
-
-
-# Run bot without screen
-* Run bot when the host machine is started
-* [chatbot.service](https://github.com/MOHOAzure/Discord-chat-bot/blob/main/chatbot.service)
-
-* Add user to manage the auto service
-```
-$ groupadd -r chatbot
-$ useradd -r -g chatbot -d "/var/chatbot" -s "/bin/bash" chatbot
-$ chown minecraft.minecraft -R /var/chatbot/
-$ 
-$ # create a system service file, the content is presented in the following section
-$ nano /etc/systemd/system/chatbot.service
-$ 
-$ chmod 644 /etc/systemd/system/chatbot.service
-$ systemctl daemon-reload
-$ systemctl enable chatbot
-$ 
-$ # manully check service could be started
-$ systemctl start chatbot
-$ systemctl status chatbot -l
-$ systemctl stop chatbot
-$
-$ # after the host machine is re-started, the service would be on-line
-```
-
-# Ref
-* Creating your first Discord Bot — Part 1, Renemari Padillo, https://medium.com/davao-js/2019-tutorial-creating-your-first-simple-discord-bot-47fc836a170b
-* https://linuxize.com/post/how-to-install-node-js-on-centos-7/
+# Event-trigged with Lambda
+* Much cheaper
+* Details: https://github.com/MOHOAzure/Discord-chat-bot/tree/main/Lambda
+ 
+# Always running with EC2
+* Easy to setup
+* Details: https://github.com/MOHOAzure/Discord-chat-bot/tree/main/EC2
