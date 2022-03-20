@@ -3,10 +3,10 @@
 * The bot is established on AWS services
   * Two methods are provided (Lambda or EC2)
   
-## Background
+# Background
 * [On-Demand-Minecraft-Sever](https://github.com/MOHOAzure/On-Demand-Minecraft-Sever)
 
-## Discord settings
+# Discord settings
 * Login https://discordapp.com/developers/applications/
 * New application named `discord-bot`
 * Add bot
@@ -25,3 +25,7 @@
 # Always running with EC2
 * Easy to setup
 * Details: https://github.com/MOHOAzure/Discord-chat-bot/tree/main/EC2
+
+# Demo
+
+ ![](https://github.com/MOHOAzure/Discord-chat-bot/blob/main/on%20test%20server.png)
